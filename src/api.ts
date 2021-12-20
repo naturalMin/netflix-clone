@@ -22,7 +22,25 @@ export interface IGetMoviesResult {
   total_results: number,
 }
 
+export interface ITVShows {
+  id: number;
+  backdrop_path: string;
+  poster_path: string;
+  name: string;
+  overview: string;
+}
+
+export interface IGetTVShowsResult {
+  results: ITVShows[], 
+
+}
+
 export function getMovies() {
   return fetch(`${BASE_PATH}/movie/now_playing?api_key=${API_KEY}`)
+  .then(response => response.json());
+}
+
+export function getTVShows() {
+  return fetch(`${BASE_PATH}/tv/airing_today?api_key=${API_KEY}`)
   .then(response => response.json());
 }

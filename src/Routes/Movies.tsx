@@ -6,6 +6,8 @@ import { motion, AnimatePresence, useViewportScroll } from "framer-motion";
 import { useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
 
+
+//css
 const Wrapper = styled.div`
   background: black;
   padding-bottom: 200px;
@@ -30,7 +32,7 @@ const Banner = styled.div<{bgPhoto: string}>`
 const Title = styled.h2`
   font-size: 50px;
   width: 50%;
-  margin-bottom: 20px;
+  margin-bottom: 20px;  
 `;
 const Overview = styled.p`
   font-size: 25px;
@@ -64,7 +66,7 @@ const Box = styled(motion.div)<{bgPhoto: string}>`
 
 const Info = styled(motion.div)`
   padding: 10px;
-  background-color: ${props => props.theme.black.lighter};
+  background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
   width: 100%;
   position: absolute;
@@ -72,6 +74,8 @@ const Info = styled(motion.div)`
   h4 {
     text-align: center;
     font-size: 18px;
+    color: ${props => props.theme.white.darker};
+    font-weight: 500;
   }
 `;
 const Overlay = styled(motion.div)`
@@ -111,6 +115,8 @@ const BigOverview = styled.p`
   top: -80px;
   color: ${props => props.theme.white.lighter};
 `;
+
+//variants
 const rowVariants = {
   hidden: {
     x: window.outerWidth + 5,
@@ -124,7 +130,7 @@ const rowVariants = {
 }
 
 const BoxVariants = {
-  normal: {
+  default: {
     scale: 1,
   },
   hover: {    
@@ -148,6 +154,7 @@ const infoVariants = {
   }
 }
 
+//offset
 const offset = 6;
 
 
@@ -176,7 +183,7 @@ function Movies() {
   .find(movie => movie.id+"" === bigMovieMatch.params.movieId); //클릭한 타켓 아이디 일치여부 판별 
   return (
     <Wrapper>{isLoading ? (
-      <Loader>Loading..</Loader>) : (
+      <Loader>Movie Loading..</Loader>) : (
         <>
           <Banner 
             onClick = {increaseIndex} 
@@ -202,7 +209,7 @@ function Movies() {
                     key = {movie.id}
                     variants = {BoxVariants}
                     whileHover = "hover"
-                    initial = "normal"
+                    initial = "default"
                     onClick = {() => onBoxClicked(movie.id)}
                     transition={{type: 'tween'}}                                      
                     bgPhoto = {makeImagePath(movie.backdrop_path, "w500")}

@@ -10,12 +10,13 @@ const Nav = styled(motion.div)`
   width: 100%;
   height: 80px;
   background-color: ${props => props.theme.black.veryDark};
+  color: ${props => props.theme.white.darker};
   position: fixed;
   top: 0;
   font-size: 15px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center;  
 `;
 const Col = styled.div`
   display: flex;
@@ -68,12 +69,10 @@ const Input = styled(motion.input)`
 // variants
 const navVars = {
   top: {
-    backgroundColor: "rgba(0, 0, 0, 1)",
-    color: "rgba(255, 255, 255)",    
+    backgroundColor: "rgba(0, 0, 0, 1)",           
   },
   scroll: {
-    backgroundColor: "rgba(0, 0, 0, 0)",
-    color: "rgba(0, 0, 0)",
+    backgroundColor: "rgba(0, 0, 0, 0)",         
   }
 }
 
