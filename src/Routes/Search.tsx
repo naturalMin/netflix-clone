@@ -16,7 +16,7 @@ function Search() {
     .then(response => response.json())
     };  
   const {data, isLoading} = useQuery<IGetMoviesResult>(['movie', 'search'], getMovieSearch);
-  console.log(data);
+  console.log(data?.results);
   return (
     <Container>
       {isLoading ? 'Searching...' : (<></>)}
