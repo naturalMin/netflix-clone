@@ -4,7 +4,6 @@ import { makeImagePath } from "../imgSrc";
 import { getTVShows, IGetTVShowsResult } from "../api";
 import { motion, AnimatePresence, useViewportScroll } from "framer-motion";
 import { useState } from "react";
-import { off } from "process";
 import { useHistory, useRouteMatch } from "react-router-dom";
 
 const Wrapper = styled.div`

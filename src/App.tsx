@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter , Switch, Route } from "react-router-dom";
 import Header from "./Components/Header";
 import Movies from "./Routes/Movies";
 import TvShow from "./Routes/TvShow";
@@ -6,7 +6,7 @@ import Search from "./Routes/Search";
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Header />
       <Switch>
         <Route path = "/tv">
@@ -20,7 +20,7 @@ function App() {
           <Movies />
         </Route>
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
 }
 

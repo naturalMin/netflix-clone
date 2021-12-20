@@ -1,5 +1,5 @@
-const API_KEY = 'ebd4d063593bc5107bde0138eb846ff2';
-const BASE_PATH = 'https://api.themoviedb.org/3';
+export const API_KEY = 'ebd4d063593bc5107bde0138eb846ff2';
+export const BASE_PATH = 'https://api.themoviedb.org/3';
 
 export interface IMovie {
   id: number;
@@ -44,3 +44,4 @@ export function getTVShows() {
   return fetch(`${BASE_PATH}/tv/airing_today?api_key=${API_KEY}`)
   .then(response => response.json());
 }
+
