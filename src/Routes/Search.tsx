@@ -22,10 +22,12 @@ const Movies = styled.ul`
 `;
 const Movie = styled.li`
   margin: 2vh auto;
+  font-size: 18px;
 `;
 const TvShows = styled.ul``;
 const TvShow = styled.li`
-  margin: 2vh auto;  
+  margin: 2vh auto;
+  font-size: 18px;
 `;
 
 function Search() {
@@ -40,8 +42,7 @@ function Search() {
     return fetch(`${BASE_PATH}/search/tv?api_key=${API_KEY}&query=${keyword}`)
     .then(response => response.json())
     };
-  const {data: TvData , isLoading: TvLoading } = useQuery<IGetTVShowsResult>(['tv', 'search'], getTvSearch);
-  console.log(MovieData, TvData);   
+  const {data: TvData , isLoading: TvLoading } = useQuery<IGetTVShowsResult>(['tv', 'search'], getTvSearch);     
   return (
     <Container>
       <Header>

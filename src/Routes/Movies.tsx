@@ -6,7 +6,6 @@ import { motion, AnimatePresence, useViewportScroll } from "framer-motion";
 import { useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
 
-
 //css
 const Wrapper = styled.div`
   background: black;
@@ -40,8 +39,15 @@ const Overview = styled.p`
 `;
 const Slider = styled.div`
   position: relative;
-  top: -100px;
+  top: -100px;  
 `;
+
+const Slidertitle = styled.h3`
+  font-size: 30px;
+  margin: 20px 10px;
+  padding-left: 10px;
+`;
+
 const Row = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -162,15 +168,15 @@ function Movies() {
   const history = useHistory(); //useHistory - 여러 route사이를 움직일 수 있음
   const bigMovieMatch = useRouteMatch<{movieId: string}>("/movies/:movieId"); //해당하는 url맞는지 판별
   const { scrollY } = useViewportScroll();
-  const {data, isLoading} = useQuery<IGetMoviesResult>(
-    ["movies", "nowPlaying"], getMovies);
+  const {data: nowData, isLoading: nowLoading} = useQuery<IGetMoviesResult>(
+    ["nowMovies", "nowPlaying"], getMovies);  
   const [index, setIndex] = useState(0);  
   const [leaving, setLeaving] = useState(false);
   const increaseIndex = () => {
-    if (data) {
+    if (nowData) {
       if (leaving) return;
       toggleLeaving();
-      const totalMovies = data.results.length - 1; // 현재 홈 스크린 페이지 1개 제외
+      const totalMovies = nowData.results.length - 1; // 현재 홈 스크린 페이지 1개 제외
       const maxIndex = Math.floor(totalMovies / offset ) - 1; // 시작이 0이므로 max는 -1
       setIndex(prev => (prev === maxIndex ? 0 : prev + 1));}
   };
@@ -179,21 +185,21 @@ function Movies() {
     history.push(`/movies/${movieId}`);
   };
   const onOverlayClick = () => history.push("/"); //goback도 가능 
-  const ClickedMovie = bigMovieMatch?.params.movieId && data?.results
+  const ClickedMovie = bigMovieMatch?.params.movieId && nowData?.results
   .find(movie => movie.id+"" === bigMovieMatch.params.movieId); //클릭한 타켓 아이디 일치여부 판별 
   return (
-    <Wrapper>{isLoading ? (
+    <Wrapper>{nowLoading ? (
       <Loader>Movie Loading..</Loader>) : (
         <>
           <Banner 
             onClick = {increaseIndex} 
-            bgPhoto={makeImagePath(data?.results[0].backdrop_path || "")}>
-            <Title>{data?.results[0].title}</Title>
-            <Overview>{data?.results[0].overview}</Overview>
+            bgPhoto={makeImagePath(nowData?.results[0].backdrop_path || "")}>
+            <Title>{nowData?.results[0].title}</Title>
+            <Overview>{nowData?.results[0].overview}</Overview>
           </Banner>
-          <Slider>           
-            <AnimatePresence initial = {false} onExitComplete = {toggleLeaving}>
-            {/* 디폴트값으로 슬라이더 가만히 둠  */}
+          <Slider>
+            <Slidertitle>Now Playing</Slidertitle>           
+            <AnimatePresence initial = {false} onExitComplete = {toggleLeaving}>            
               <Row 
                 variants={rowVariants}
                 initial="hidden"
@@ -202,7 +208,7 @@ function Movies() {
                 transition={{type: "tween", duration: 1}}
                 key={index} 
               >
-                {data?.results.slice(1).slice(offset * index, offset * index + offset)
+                {nowData?.results.slice(1).slice(offset * index, offset * index + offset)
                 .map((movie) => (
                   <Box
                     layoutId={movie.id + ""} 
@@ -221,7 +227,7 @@ function Movies() {
                 ))}
               </Row>
             </AnimatePresence>            
-          </Slider>
+          </Slider>          
           <AnimatePresence>
             {bigMovieMatch ? (
             <>
@@ -244,7 +250,7 @@ function Movies() {
               </BigMovie>
             </>
             ): null}
-          </AnimatePresence>
+          </AnimatePresence>                    
         </>
       )}
     </Wrapper>
