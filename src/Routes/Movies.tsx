@@ -243,7 +243,7 @@ function Movies() {
                     ClickedMovie.backdrop_path, "w500")})`,
                     }} 
                   />
-                  <BigTitle>{ClickedMovie.title}</BigTitle>
+                  <BigTitle>{ClickedMovie.title}</BigTitle>                  
                   <BigOverview>{ClickedMovie.overview}</BigOverview>
                 </>
                 )}
