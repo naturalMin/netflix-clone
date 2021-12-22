@@ -1,6 +1,6 @@
 # Netflix clone 
 nomadcoder React.js Master class Final Code Challenge.
-deploy: https://naturalmin.github.io/netflix-clone/
+* deploy: https://naturalmin.github.io/netflix-clone/
 
 ### 사용기술
 * React.js
@@ -14,6 +14,7 @@ deploy: https://naturalmin.github.io/netflix-clone/
     * animatePresence
     * useViewportScroll
   * API 호출 (fetch)
+    * 참고 api주소: https://developers.themoviedb.org/3/getting-started/introduction
 
 ### 구현 기능
 
@@ -28,3 +29,5 @@ deploy: https://naturalmin.github.io/netflix-clone/
 * Frama-motion으로 movie slider 및 modal 구현
 * Search페이지에 Search api 호출해서 ui구현
 
+### 참고 강의
+https://nomadcoders.co/react-masterclass/lobby
