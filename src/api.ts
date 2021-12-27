@@ -36,8 +36,23 @@ export interface IGetTVShowsResult {
 
 }
 
-export function getMovies() {
+export function getNowMovies() {
   return fetch(`${BASE_PATH}/movie/now_playing?api_key=${API_KEY}`)
+  .then(response => response.json());
+}
+
+export function getLatestMovies() {
+  return fetch(`${BASE_PATH}/movie/latest?api_key=${API_KEY}`)
+  .then(response => response.json());
+}
+
+export function getTopMovies() {
+  return fetch(`${BASE_PATH}/movie/top_rated?api_key=${API_KEY}`)
+  .then(response => response.json());
+}
+
+export function getUpcomingMovies() {
+  return fetch(`${BASE_PATH}/movie/upcoming?api_key=${API_KEY}`)
   .then(response => response.json());
 }
 
